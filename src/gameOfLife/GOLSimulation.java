@@ -9,13 +9,11 @@ public class GOLSimulation {
     private final int row, col, multiplier = 10;
     private int[][] board;
     private int[][] nextBoard;
-    private boolean endFlag;
     GOLSimulation(int row, int col) {
         this.row = row;
         this.col = col;
         board = new int[row+2][col+2];
         nextBoard = new int[row + 2][col + 2];
-        endFlag = false;
         initialize();
     }
 
@@ -52,18 +50,15 @@ public class GOLSimulation {
 
     public void nextGeneration() {
         int countNeighbor;
-        endFlag = true;
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= col; j++) {
                 countNeighbor = countNeighbor(i, j);
                 if (countNeighbor <= 1 || countNeighbor >= 4) {
                     nextBoard[i][j] = 0;
-                    endFlag = endFlag && (board[i][j] == 0);
                 } else if (countNeighbor == 2) {
                     nextBoard[i][j] = board[i][j];
                 } else if (countNeighbor == 3) {
                     nextBoard[i][j] = 1;
-                    endFlag = endFlag || (board[i][j] == 1);
                 }
             }
         }
@@ -98,7 +93,7 @@ public class GOLSimulation {
         int next;
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= col; j++) {
-                next = random.nextInt(101);
+                next = random.nextInt(100);
                 if (next < percentage)
                     board[i][j] = 1;
                 else
