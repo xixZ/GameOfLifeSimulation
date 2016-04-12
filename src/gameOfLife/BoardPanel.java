@@ -61,4 +61,8 @@ public class BoardPanel extends JPanel {
         board.nextGeneration();
         repaint();
     }
+
+    public void setBoard(GOLSimulation board) {
+        this.board = board;
+    }
 }

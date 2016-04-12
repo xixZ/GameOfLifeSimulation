@@ -12,6 +12,6 @@ public class GameOfLifeMain implements Runnable {
 
     @Override
     public void run() {
-        new GUI(new GOLSimulation(40, 40));
+        new GUI();
     }
 }

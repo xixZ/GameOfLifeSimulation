@@ -6,12 +6,13 @@ import java.util.Random;
  * Created by xi on 2016/4/4.
  */
 public class GOLSimulation {
-    private final int row, col, multiplier = 10;
+    private final int row, col, multiplier;
     private int[][] board;
     private int[][] nextBoard;
     GOLSimulation(int row, int col) {
         this.row = row;
         this.col = col;
+        multiplier = 600 / col;
         board = new int[row+2][col+2];
         nextBoard = new int[row + 2][col + 2];
         initialize();

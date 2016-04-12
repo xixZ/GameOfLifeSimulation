@@ -22,19 +22,22 @@ public class GUI extends JFrame implements ActionListener {
     private JButton fastForwardButton;
     private JButton jumpToButton;
     private JTextField tickValue;
+    private JTextField heightField;
+    private JTextField widthField;
 
     private GOLSimulation board;
     private BoardPanel boardPanel;
     private Integer curTime;
-    public GUI(GOLSimulation board) {
+
+    public GUI() {
         //  tick.start();
-        this.board = board;
+        board = new GOLSimulation(40, 40);
         curTime = 0;
         boardPanel = new BoardPanel(board);
         setContentPane(rootPanel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game of Life");
-        setSize(board.getCol() * board.getMultiplier() + 320, board.getRow() * board.getMultiplier() + 100);
+        setSize(1000, 700);
         setLocationRelativeTo(null);
         setVisible(true);
         GridBagConstraints c = new GridBagConstraints();
@@ -47,7 +50,7 @@ public class GUI extends JFrame implements ActionListener {
         c.gridy = 0;
         rootPanel.add(boardPanel, c);
         addButtonListener();
-        board.genRandomBoard(20);
+        board.genRandomBoard(0);
     }
 
     private void addButtonListener() {
@@ -78,6 +81,12 @@ public class GUI extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String percentageText = percentageField.getText();
+                String height = heightField.getText();
+                String width = widthField.getText();
+                if (!height.isEmpty() && !width.isEmpty()) {
+                    board = new GOLSimulation(Integer.parseInt(height), Integer.parseInt(width));
+                    boardPanel.setBoard(board);
+                }
                 if (percentageText.isEmpty()) {
                     board.genRandomBoard(20);
                 } else {
