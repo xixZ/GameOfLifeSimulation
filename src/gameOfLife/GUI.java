@@ -56,14 +56,12 @@ public class GUI extends JFrame implements ActionListener {
     private void addButtonListener() {
         runButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                boardPanel.setIsActive(true);
                 tick.setDelay(500);
                 tick.start();
             }
         });
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                boardPanel.setIsActive(false);
                 tick.stop();
             }
         });
@@ -71,9 +69,9 @@ public class GUI extends JFrame implements ActionListener {
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boardPanel.setIsActive(false);
                 boardPanel.clearBoard();
                 resetTime();
+                tick.stop();
             }
         });
 
@@ -101,7 +99,6 @@ public class GUI extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tick.setDelay(100);
-                boardPanel.setIsActive(true);
                 tick.start();
             }
         });
@@ -136,10 +133,8 @@ public class GUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (boardPanel.getIsActive()) {
-            boardPanel.updateBoard();
-            advanceTime();
-        }
+        boardPanel.updateBoard();
+        advanceTime();
     }
 
 }

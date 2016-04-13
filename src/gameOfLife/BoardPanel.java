@@ -12,30 +12,17 @@ import javax.swing.*;
 
 public class BoardPanel extends JPanel {
     private GOLSimulation board;
-    private boolean isActive;
     public BoardPanel(GOLSimulation board) {
         this.board = board;
-        isActive = false;
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (!isActive) {
-                    board.getBoard()[e.getY() / board.getMultiplier() + 1][e.getX() / board.getMultiplier() + 1] = 1 - board.getBoard()[e.getY() / board.getMultiplier() + 1][e.getX() / board.getMultiplier() + 1];
-                    repaint();
-                } else {
-                    Toolkit.getDefaultToolkit().beep();
-                }
+                board.getBoard()[e.getY() / board.getMultiplier() + 1][e.getX() / board.getMultiplier() + 1] = 1 - board.getBoard()[e.getY() / board.getMultiplier() + 1][e.getX() / board.getMultiplier() + 1];
+                repaint();
             }
         });
     }
 
-    public void setIsActive(boolean toSet) {
-        isActive = toSet;
-    }
-
-    public boolean getIsActive() {
-        return isActive;
-    }
     public void clearBoard() {
         for (int i = 1; i <= board.getRow(); i++) {
             for (int j = 1; j <= board.getCol(); j++) {
